@@ -1,0 +1,12 @@
+.authnav__link.active,
+.authnav__link:hover {
+  color: #d22566;
+}
+
+.authnav__link {
+  padding: 16px;
+}
+
+.authnav__list {
+  display: flex;
+}

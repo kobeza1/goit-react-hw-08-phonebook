@@ -3,19 +3,16 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { store } from 'redux/store';
 
-import { GlobalStyles } from 'utils/GlobalStyles';
-import { ThemeProvider } from 'styled-components';
-import { theme } from 'constants/theme';
 import App from 'components/App';
 import './index.css';
+import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <Provider store={store}>
+    <Provider store={store}>
+      <BrowserRouter basename="/goit-react-hw-08-phonebook">
         <App />
-      </Provider>
-    </ThemeProvider>
-    <GlobalStyles></GlobalStyles>
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );

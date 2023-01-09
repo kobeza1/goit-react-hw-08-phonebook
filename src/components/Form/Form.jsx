@@ -2,16 +2,15 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
 import customNotiflix from 'utils/notiflix';
-
-import { FormStyled, Label, Input } from './Form.styled';
-import { addContact } from 'redux/operations';
-import { getContacts } from 'redux/selectors';
+import { addContact } from 'redux/auth/operations';
+import { selectContacts } from 'redux/selectors';
+import css from './Form.module.css';
 
 export const Form = () => {
   const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  const contactsStore = useSelector(getContacts);
+  const contactsStore = useSelector(selectContacts);
 
   const handleInput = event => {
     const { name, value } = event.currentTarget;
@@ -52,10 +51,11 @@ export const Form = () => {
   };
 
   return (
-    <FormStyled onSubmit={handleSubmit}>
-      <Label>
+    <form className={css.form} onSubmit={handleSubmit}>
+      <label className={css.form__label}>
         Name
-        <Input
+        <input
+          className={css.form__input}
           type="text"
           name="name"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -64,10 +64,11 @@ export const Form = () => {
           value={name}
           onChange={handleInput}
         />
-      </Label>
-      <Label>
+      </label>
+      <label className={css.form__label}>
         Number
-        <Input
+        <input
+          className={css.form__input}
           type="tel"
           name="number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -76,8 +77,10 @@ export const Form = () => {
           value={number}
           onChange={handleInput}
         />
-      </Label>
-      <button type="submit">Add contact</button>
-    </FormStyled>
+      </label>
+      <button className={css.form__button} type="submit">
+        Add contact
+      </button>
+    </form>
   );
 };

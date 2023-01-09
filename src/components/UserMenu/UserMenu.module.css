@@ -1,0 +1,7 @@
+.user__menu {
+  display: flex;
+}
+
+.user__name {
+  margin-right: 24px;
+}

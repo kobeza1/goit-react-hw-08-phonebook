@@ -1,34 +1,26 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import React, { Suspense, lazy } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { Layout } from './Layout/Layout';
+import { NotFound } from 'pages/NotFound/NotFound';
 
-import { Form } from './Form/Form';
-import { Box, Loader } from './App.styled';
-import { ContactsList } from './Contacts/ContactsList';
-import { Section } from './Section/Section';
-import { Filter } from './Filter/Filter';
-import { fetchContacts } from 'redux/operations';
-import { getError, getIsLoading } from 'redux/selectors';
+const HomePage = lazy(() => import('pages/Home/Home'));
+const SignUpPage = lazy(() => import('pages/SignUp/SignUp'));
+const LoginPage = lazy(() => import('pages/Login/Login'));
+const Contacts = lazy(() => import('pages/Contacts/Contacts'));
 
 const App = () => {
-  const dispatch = useDispatch();
-  const isLoading = useSelector(getIsLoading);
-  const error = useSelector(getError);
-
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
-
   return (
-    <Box>
-      {isLoading && !error && <Loader>Request in progress...</Loader>}
-      <Section title={'Phonebook'}>
-        <Form />
-      </Section>
-      <Section title={'Contacts'}>
-        <Filter />
-        <ContactsList />
-      </Section>
-    </Box>
+    <Suspense fallback={null}>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/contacts" element={<Contacts />} />
+        </Route>
+        <Route path="*" element={<NotFound />}></Route>
+      </Routes>
+    </Suspense>
   );
 };
 

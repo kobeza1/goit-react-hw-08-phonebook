@@ -1,0 +1,15 @@
+.nav__link.active,
+.nav__link:hover {
+  color: #d22566;
+}
+
+.nav__list {
+  display: flex;
+  padding: 20px;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.nav__link {
+  padding: 16px;
+}
