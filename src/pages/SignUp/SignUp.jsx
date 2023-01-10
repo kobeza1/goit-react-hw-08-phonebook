@@ -30,7 +30,14 @@ const SignUp = () => {
         </label>
         <label className={css.form__label}>
           Password
-          <input className={css.form__input} type="password" name="password" />
+          <input
+            className={css.form__input}
+            type="password"
+            name="password"
+            pattern=".{7,}"
+            title="The password must be at least 7 characters long"
+            required
+          />
         </label>
         <button type="submit">Sign Up</button>
       </form>
